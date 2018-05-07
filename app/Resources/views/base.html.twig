@@ -1,13 +1,41 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+              rel="stylesheet">
+
+        <!-- ... -->
+        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <!-- Chrome, Firefox OS and Opera -->
+        <meta name="theme-color" content="#363D42">
+        <!-- Windows Phone -->
+        <meta name="msapplication-navbutton-color" content="#363D42">
+        <!-- iOS Safari -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="#363D42">
+        <meta name="mobile-web-app-capable" content="yes">
     </head>
     <body>
+
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {% include 'nav.html.twig'  %}
+
+    {% endif %}
+
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+        <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyAhLAdqOwzNTwOI32Oe43yseA2oTegB7ZI"></script>
+
+    <!-- ... -->
+    <script src="{{ asset('build/js/app.js') }}"></script>
+    {% block javascripts %}{% endblock %}
     </body>
 </html>

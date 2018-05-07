@@ -1,0 +1,25 @@
+{% extends 'default/master.html.twig' %}
+
+    {% set _template = app.request.attributes.get("_controller")|split('::') %}
+    {% set _bundle = _template[0]|split('\\') %}
+    {% set controller = _bundle[2] %}
+
+    {% set action = _template[1] %}
+
+    {% if action == 'showProfileAction' and controller == 'ProfileController'%}
+        {% set userid = app.request.query.get('id') %}
+
+        {% if userid is empty %}
+            {%  set userid = app.user.id %}
+        {% endif %}
+    {% else %}
+        {% set userid = app.user.id %}
+    {% endif %}
+
+    {% set user = profile.byuserid(userid) %}
+
+
+{% block main_content %}
+
+    <h4>Actividades de {{ userid }}</h4>
+{% endblock %}

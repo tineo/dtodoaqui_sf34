@@ -1,0 +1,52 @@
+{
+  "name": "DtodoAqui",
+  "version": "1.2.0",
+  "dependencies": {
+    "@symfony/webpack-encore": "^0.20.1",
+    "babel-preset-react": "^6.24.1",
+    "jquery": "^3.2.1",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "sass-loader": "^6.0.6",
+
+    "bootstrap": "4.0.0-beta.3",
+    "corejs-typeahead": "^1.2.1",
+    "dropzone": "^5.2.0",
+    "flickity": "^2.0.10",
+    "font-awesome": "^4.7.0",
+    "google-maps-infobox": "^2.0.0",
+    "google-maps-utility-library-v3-infobox": "^1.1.14",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.3.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-html-replace": "^1.6.2",
+    "gulp-md5-assets": "^0.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^2.0.1",
+    "gulp-uglifyjs": "^0.6.2",
+    "jquery-backstretch": "^2.1.16",
+    "material-design-icons": "^3.0.1",
+    "mdi": "^2.1.19",
+    "popper.js": "^1.12.9",
+    "pump": "^1.0.2",
+    "select2": "^4.0.6-rc.1",
+    "select2-bootstrap-theme": "https://github.com/angel-vladov/select2-bootstrap-theme.git",
+    "select2-bootstrap4-theme": "^1.0.0",
+    "selectize": "^0.12.4",
+    "tether": "^1.4.3",
+    "toastr": "^2.1.4",
+    "tooltipster": "^4.2.5",
+    "typeahead.js": "^0.11.1"
+  },
+  "engines": {
+    "node": "8.9.4"
+  },
+  "scripts": {
+    "postinstall": "yarn run encore production"
+  },
+  "devDependencies": {
+
+  }
+}

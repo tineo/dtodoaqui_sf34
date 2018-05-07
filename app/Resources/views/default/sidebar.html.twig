@@ -1,0 +1,158 @@
+<div id="left-sideq">
+
+    <div id="invitation-box" class="ui-box ui-box-left">
+        <div class="form-group" id="tt-where">
+
+            <label class="h6" for="inputPassword4">INVITA A UN AMIGO</label>
+            <input type="email"
+                   class="typeahead form-control form-control-sm"
+                   id="inputPassword4" placeholder="Email">
+            <button type="button" class="btn btn-outline-primary btn-sm btn-block mt-2">Enviar invitacion a un amigo</button>
+
+        </div>
+
+    </div>
+
+    <div id="bussiness-box" class="ui-box ui-box-left">
+
+        <div class="row">
+            <div class="col-8">
+                <h6>ESTABLECIMIENTOS<span> ({{ my_favorites.counts }})</span></h6>
+            </div>
+            <div class="col-4">
+                <a class="btn btn-outline-secondary btn-sm btn-block" href="#">
+                    Ver mas
+                </a>
+            </div>
+        </div>
+        {% for place in my_favorites.list %}
+            <a href="{{ path('establishment', { 'id': place.id }) }}">
+                <div class="media mt-1 media-middle">
+                    <img class="d-flex m-1 mr-2 rounded"
+                         src="https://78.media.tumblr.com/avatar_db1d7a634152_64.pnj" alt="{{ place.id }}"
+                    >
+                    <div class="media-body">
+                        <span class="mt-0 d-block">{{ place.businessName }}</span>
+                        <span class="mt-0 d-block">{{ place.address }}</span>
+
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+    <div id="friends-box" class="ui-box ui-box-left">
+
+        <div class="row">
+            <div class="col-8">
+                <h6>AMIGOS
+                    <span>({{ my_friends.counts }})</span>
+                </h6>
+            </div>
+            <div class="col-4">
+                <a class="btn btn-outline-secondary btn-sm btn-block" href="#">
+                    Ver mas
+                </a>
+            </div>
+        </div>
+
+        <div class="row mt-1">
+            <div class="col-9">
+                <div class="form-group" id="tt-where">
+                    <input type="email"
+                           class="typeahead form-control form-control-sm"
+                           id="inputPassword4" placeholder="">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group" id="tt-where">
+                    <button type="button" class="btn btn-outline-primary btn-sm btn-block">Buscar</button>
+                </div>
+            </div>
+        </div>
+
+
+        {% for friend in my_friends.list %}
+            <a href="{{ path('profile_user_show', { 'id': friend.id }) }}">
+                <div class="media mt-1 media-middle">
+                    <img class="d-flex m-1 mr-2 rounded"
+                         src="https://78.media.tumblr.com/avatar_db1d7a634152_64.pnj" alt="{{ friend.id }}"
+                    >
+                    <div class="media-body">
+                        {{ friend.firstname }} {{ friend.lastname }} ({{ friend.id }})
+
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+    <div id="registry-box" class="ui-box ui-box-left">
+        <div class="row">
+            <div class="col-8">
+                <h6>REGISTROS<span> ({{ my_favorites.counts }})</span></h6>
+            </div>
+            <div class="col-4">
+                <a class="btn btn-outline-secondary btn-sm btn-block" href="#">
+                    Ver mas
+                </a>
+            </div>
+        </div>
+        {% for place in my_favorites.list %}
+            <a href="{{ path('establishment', { 'id': place.id }) }}">
+                <div class="media mt-1 media-middle">
+                    <img class="d-flex m-1 mr-2"
+                         src="https://78.media.tumblr.com/avatar_db1d7a634152_64.pnj" alt="{{ place.id }}"
+                    >
+                    <div class="media-body">
+                        <span class="mt-0 d-block">{{ place.businessName }}</span>
+                        <span class="mt-0 d-block">{{ place.address }}</span>
+                        <span class="mt-0 d-block">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        </span>
+
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+    <div id="favorites-box" class="ui-box ui-box-left">
+        <div class="row">
+            <div class="col-8">
+                <h6>FAVORITOS<span> ({{ my_favorites.counts }})</span></h6>
+            </div>
+            <div class="col-4">
+                <a class="btn btn-outline-secondary btn-sm btn-block" href="#">
+                    Ver mas
+                </a>
+            </div>
+        </div>
+        {% for place in my_favorites.list %}
+            <a href="{{ path('establishment', { 'id': place.id }) }}">
+                <div class="media mt-1 media-middle">
+                    <img class="d-flex m-1 mr-2"
+                         src="https://78.media.tumblr.com/avatar_db1d7a634152_64.pnj" alt="{{ place.id }}"
+                    >
+                    <div class="media-body">
+                        <span class="mt-0 d-block">{{ place.businessName }}</span>
+                        <span class="mt-0 d-block">{{ place.address }}</span>
+                        <span class="mt-0 d-block">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+            </a>
+
+
+        {% endfor %}
+    </div>
+</div>

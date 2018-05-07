@@ -1,0 +1,356 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div class="container">
+
+        {#<div id="welcome-header">
+            <img src="{{ asset('img/welcome.png') }}" alt="DtodoAqui" /><span>Bienvenido</span>
+        </div>#}
+        <div class="row">
+            <div class="col-12 col-md-8 d-none d-xl-block d-lg-block d-md-block">
+
+                <div class="ui-box">
+
+                    <div id="welcome-panel">
+                        <div id="welcome-message">
+                            <img src="{{ asset('img/logo.png') }}" alt="DtodoAqui" width="130px">
+                            <p>Bienvenido, <br>Somos la red más grande de Latinoamérica que conecta personas con los negocios locales.</p>
+                            <p>Obtenya tu cuenta GARTIS y registra tu negocio.</p>
+                            <img src="{{ asset('img/play.png') }}" alt="Disponble en Google play">
+
+                        </div>
+
+                        <div id="first-step" class="d-none d-xl-inline-block d-lg-inline-block">
+                        </div>
+                    </div>
+
+
+                    <div id="bussiness-panel">
+                        <div id="bussiness-categoies">
+                            <div class="cateogoty-item"><i class="material-icons md-24 md-light">&#xE87C;</i><span>Alimentacion</span></div>
+                            <div class="cateogoty-item"><i class="material-icons md-24 md-light">&#xE87C;</i><span>Noche</span></div>
+                            <div class="cateogoty-item"><i class="material-icons md-24 md-light">&#xE87C;</i><span>Restaurantes y bares</span></div>
+                            <div class="cateogoty-item"><i class="material-icons md-24 md-light">&#xE87C;</i><span>Compras</span></div>
+                            <div class="cateogoty-item"><i class="material-icons md-24 md-light">&#xE87C;</i><span>Vida activa</span></div>
+                        </div>
+                        <div id="bussiness-carousel">
+
+                            {% for i in 1..9 %}
+
+                                <div class="bussiness-item  item-box">
+                                    <div class="media mt-1 mb-1">
+                                        <img class="d-flex m-1 rounded" src="https://78.media.tumblr.com/avatar_db1d7a634152_64.pnj" alt="{{ i }}"
+                                             style="width: 40px; height: 40px"
+                                        >
+                                        <div class="media-body">
+                                            <span class="mt-0">Nombre del negocio</span>
+                                            <span class="mt-0">direccion</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% endfor %}
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-12 col-md-4">
+
+                <h6>¿Como registrarse?</h6>
+
+                <div class="ui-box login-box">
+
+                    {% if error %}
+                        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    <form action="{{ path("fos_user_security_check") }}" method="post">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+
+
+                        <input type="text" id="username" name="_username"
+                               value="{{ last_username }}"
+                               required="required"
+                               placeholder="Email"
+                               class="form-control form-control-sm"
+                        />
+                        <input type="password" id="password" name="_password"
+                               required="required"
+                               placeholder="Contraseña"
+                               class="form-control form-control-sm mt-1 mb-1"
+                        />
+                        <input type="submit" class="login login-submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+
+
+
+                    </form>
+                    <a href="#">Olvide mi contraseña</a>
+                </div>
+
+                <div id="facebook-box" onclick="location.href='{{ "/login/facebook" }}';">
+                </div>
+
+
+                <div class="ui-box register-box">
+                    <h6>CREA TU CUENTA AQUI</h6>
+                    {% if ( app.request.get('msg_register_ok') is not null ) %}
+                        <p>{{ 'registration.check_email'|trans({'%email%': app.request.get('email')}) }}</p>
+                    {% endif %}
+
+                    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register')}) }}
+
+                    {{ form_widget(form.firstname, { 'attr': {'placeholder': 'Nombres', 'class' : 'form-control form-control-sm mb-1'}}) }}
+                    {{ form_errors(form.firstname) }}
+
+                    {{ form_widget(form.lastname, {'attr': {'placeholder': 'Apellidos', 'class' : 'form-control form-control-sm mb-1'}}) }}
+                    {{ form_errors(form.lastname) }}
+
+                    {{ form_widget(form.email,{ 'attr': {'placeholder': 'Email', 'class' : 'form-control form-control-sm mb-1'}}) }}
+                    {{ form_errors(form.email) }}
+
+                    {{ form_widget(form.plainPassword.first,{ 'attr': {'placeholder': 'Contraseña', 'class' : 'form-control form-control-sm mb-1'}}) }}
+                    {{ form_errors(form.plainPassword.first) }}
+
+                    {{ form_widget(form.plainPassword.second,{ 'attr': {'placeholder': 'Repita Contraseña', 'class' : 'form-control form-control-sm mb-1'}}) }}
+                    {{ form_errors(form.plainPassword.second) }}
+
+
+                    <input type="submit" value="{{ 'registration.submit'|trans }}" />
+
+                    {{ form_rest(form) }}
+
+
+                </div>
+
+                <div class="ui-box activity-box">
+                    <h6>ACTIVIDAD</h6>
+
+                    <div id="activity-carousel">
+
+                        {% for i in 1..5 %}
+
+                            <div class="activity-item item-box">
+                                <div class="media mt-1 mb-1">
+                                    <img class="d-flex m-1 rounded" src="https://78.media.tumblr.com/avatar_db1d7a634152_64.pnj" alt="{{ i }}"
+                                         style="width: 40px; height: 40px"
+                                    >
+                                    <div class="media-body">
+                                        <span class="mt-0">Nombre del negocio</span>
+                                        <span class="mt-0">direccion</span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="welcome-box ">
+
+
+
+        </div>
+
+
+        {#
+        <div class="front-box">
+
+            <h6>¿Como registrarse?</h6>
+
+            <div class="ui-box login-box">
+
+                {% if error %}
+                    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                <form action="{{ path("fos_user_security_check") }}" method="post">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+
+
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="Email" />
+                    <input type="password" id="password" name="_password" required="required" placeholder="Contraseña"/>
+                    <input type="submit" class="login login-submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+
+
+
+                </form>
+                <a href="#">Olvide mi contraseña</a>
+            </div>
+
+            <div id="facebook-box" onclick="location.href='{{ "/login/facebook" }}';">
+            </div>
+
+
+            <div class="ui-box register-box">
+                <h3>CREA TU CUENTA AQUI</h3>
+                {% if ( app.request.get('msg_register_ok') is not null ) %}
+                <p>{{ 'registration.check_email'|trans({'%email%': app.request.get('email')}) }}</p>
+                {% endif %}
+
+                {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register')}) }}
+
+                {{ form_widget(form.firstname, { 'attr': {'placeholder': 'Nombres'}}) }}
+                {{ form_errors(form.firstname) }}
+
+                {{ form_widget(form.lastname, {'attr': {'placeholder': 'Apellidos'}}) }}
+                {{ form_errors(form.lastname) }}
+
+                {{ form_widget(form.email,{ 'attr': {'placeholder': 'Email'}}) }}
+                {{ form_errors(form.email) }}
+
+                {{ form_widget(form.plainPassword.first,{ 'attr': {'placeholder': 'Contraseña'}}) }}
+                {{ form_errors(form.plainPassword.first) }}
+
+                {{ form_widget(form.plainPassword.second,{ 'attr': {'placeholder': 'Repita Contraseña'}}) }}
+                {{ form_errors(form.plainPassword.second) }}
+
+
+                <input type="submit" value="{{ 'registration.submit'|trans }}" />
+
+                {{ form_rest(form) }}
+
+
+            </div>
+
+            <div class="ui-box activity-box">
+                <h3>ACTIVIDAD</h3>
+
+                <div id="activity-carousel">
+
+                    {% for i in 1..5 %}
+
+                    <div class="activity-item item-box">
+                        <div class="activity-item-logo item-logo">
+                            <img src="{{ asset('img/play.png') }}" height="40" width="40" />
+                        </div>
+                        <div class="activity-item-description item-description">
+                            <span>Cesar Gutierrez Tineo</span>
+                            <span>Este es el primer consejo que estoy escribiendo para esta comindad</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        </div>
+        #}
+
+        {% include 'footer.html.twig' %}
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        // This is called with the results from from FB.getLoginStatus().
+        function statusChangeCallback(response) {
+            console.log('statusChangeCallback');
+            console.log(response);
+            // The response object is returned with a status field that lets the
+            // app know the current login status of the person.
+            // Full docs on the response object can be found in the documentation
+            // for FB.getLoginStatus().
+            if (response.status === 'connected') {
+                // Logged into your app and Facebook.
+                testAPI();
+            } else if (response.status === 'not_authorized') {
+                // The person is logged into Facebook, but not your app.
+                document.getElementById('status').innerHTML = 'Please log ' +
+                    'into this app.';
+            } else {
+                // The person is not logged into Facebook, so we're not sure if
+                // they are logged into this app or not.
+                document.getElementById('status').innerHTML = 'Please log ' +
+                    'into Facebook.';
+            }
+        }
+
+        // This function is called when someone finishes with the Login
+        // Button.  See the onlogin handler attached to it in the sample
+        // code below.
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+            });
+        }
+
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '1340587566008836',
+                cookie     : true,  // enable cookies to allow the server to access
+                                    // the session
+                xfbml      : true,  // parse social plugins on this page
+                version    : 'v2.8' // use graph api version 2.8
+            });
+
+            // Now that we've initialized the JavaScript SDK, we call
+            // FB.getLoginStatus().  This function gets the state of the
+            // person visiting this page and can return one of three states to
+            // the callback you provide.  They can be:
+            //
+            // 1. Logged into your app ('connected')
+            // 2. Logged into Facebook, but not your app ('not_authorized')
+            // 3. Not logged into Facebook and can't tell if they are logged into
+            //    your app or not.
+            //
+            // These three cases are handled in the callback function.
+
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+            });
+
+        };
+
+        // Load the SDK asynchronously
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        // Here we run a very simple test of the Graph API after login is
+        // successful.  See statusChangeCallback() for when this call is made.
+        function testAPI() {
+            //console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', function(response) {
+                //console.log('Successful login for: ' + response.name);
+                //document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
+            });
+        }
+
+
+
+
+       /* document.getElementById('facebook-box').addEventListener('click', function() {
+            //do the login
+            FB.login(function(response) {
+                if (response.authResponse) {
+                    //user just authorized your app
+                    top.location.href = '/master';
+                }
+            }, {scope: 'email,public_profile', return_scopes: true});
+        }, false);*/
+    </script>
+
+
+    <!-- ... -->
+    <script src="{{ asset('build/js/landin.js') }}"></script>
+
+{% endblock %}

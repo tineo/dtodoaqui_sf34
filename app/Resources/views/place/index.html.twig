@@ -1,0 +1,134 @@
+{% extends 'default/master.html.twig' %}
+
+
+{% block main_content%}
+  <div class="media mb-2  media-middle">
+    <img class="d-flex  mr-2" src="https://78.media.tumblr.com/avatar_db1d7a634152_64.pnj" alt="{{ place.id }}"
+    >
+    <div class="media-body">
+      <h1>{{ place.name }}</h1>
+      <h4>   {{ place.businessName }} ({{ place.id }})
+      </h4>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="ui-map-register">
+
+
+    <div class="clearing"></div>
+  </div>
+  <div id="map"></div>
+  <input type="hidden" id="map_latitude" value="{{ place.latitude }}" />
+  <input type="hidden" id="map_longitude" value="{{ place.longitude }}" />
+
+  <p class="text-center">{{ place.address }}</p>
+  <p class="text-center">
+  <button type="button" class="btn btn-secondary btn-sm mt-1">
+    Cargar imagen del establecimiento
+  </button>
+
+  <button type="button" class="btn btn-primary btn-sm mt-1">
+    Compartir una imagen
+  </button>
+  </p>
+
+    {% if place.links is not empty %}
+        {% for label, value in place.links|json_decode|cast_to_array %}
+          <div> {{ label }} : {{ value }} </div>
+        {% endfor %}
+    {% endif %}
+
+    {#{ dump(place.links|json_decode|cast_to_array) }#}
+
+    {#<form action="/upload" method="POST" class="dropzone" id="my-awesome-dropzone">
+      <div class="fallback">
+        <input name="file" type="file" multiple />
+        <input type="submit" value="Upload" />
+      </div>
+    </form>#}
+  <div style="display: none
+">
+    <div id="template-preview">
+      <div class="dz-preview dz-file-preview well m-1" id="dz-preview-template">
+        <div class="dz-details">
+          <i class="material-icons" data-dz-remove >cancel</i>
+          <img data-dz-thumbnail />
+        </div>
+        <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+        <div class="dz-success-mark"><span></span></div>
+        <div class="dz-error-mark"><span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="droparea">
+    <div class="media m-0 media-middle dz-clickable">
+      <i class="material-icons md-48">add_to_photos</i>
+      <div class="media-body">
+        <h4 class="mt-0 ml-3">Has click o arrastra las imagenes aqui para subir imagenes a <strong>{{ place.businessName }}</strong>.</h4>
+
+      </div>
+    </div>
+  </div>
+
+    <div class="m-3">
+      <p class="text-center">
+
+
+        <!-- Button trigger modal -->
+
+        <button type="button"
+              class="btn btn-outline-primary btn-sm"
+                data-toggle="modal" data-target="#exampleModalLong"
+                id="btn-upload">Subir imagenes</button>
+      </p>
+
+      <div class="progress">
+        <div class="progress-bar" role="progressbar"
+             style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+
+        </div>
+      </div>
+
+    </div>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div id="previewsContainer"></div>
+
+
+{% endblock %}
+{% block javascripts %}
+    {{  parent()  }}
+  <script src="{{ asset('js/infobox.js') }}"></script>
+  <!-- ... -->
+  <script src="{{ asset('build/js/place.js') }}"></script>
+
+
+{% endblock %}

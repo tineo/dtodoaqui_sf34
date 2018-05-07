@@ -1,0 +1,192 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% set _template = app.request.attributes.get("_controller")|split('::') %}
+    {% set _bundle = _template[0]|split('\\') %}
+    {% set controller = _bundle[2] %}
+
+    {% set action = _template[1] %}
+
+    {% if action == 'showProfileAction' and controller == 'ProfileController'%}
+        {% set userid = app.request.query.get('id') %}
+
+        {% if userid is empty %}
+            {%  set userid = app.user.id %}
+        {% endif %}
+    {% else %}
+        {% set userid = app.user.id %}
+    {% endif %}
+
+    {% set user = profile.byuserid(userid) %}
+
+
+    <div id="app-wrapper">
+        <div class="container">
+
+            <div id="search-pane" class="row m-1 d-none d-xl-flex d-lg-flex d-md-flex">
+                <div class="form-row  col-3"></div>
+                <div class="form-row  col-9  ml-2 mb-2">
+                    {% include 'searchbox.html.twig' %}
+                </div>
+
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 m-1 ml-lg-4 ml-md-2">
+                    <div id="photo-boxq" class="photoBoxq">
+                        <div id="photo-imageq" style="width: 156px; height: 156px" class="d-block mx-auto" >
+                            <a alt="" title="" >
+                                {#<img src="http://kt.wowkorea.jp/img/album/7/37291/68931_ss.png" alt="foto"  class="d-block mx-auto rounded img-thumbnail">#}
+                                <img
+                                        src="http://images6.fanpop.com/image/photos/40800000/Hani-Icons-ahn-hee-yeon-hani-40826028-200-200.png"
+                                        alt="foto"  class=" rounded img-thumbnail">
+                            </a>
+                        </div>
+
+                        <div id="photo-option  " class=" d-none d-xl-block d-lg-block d-md-block   ui-box">
+
+
+                            <a target="_blank" href="http://facebook.com/{{ user.facebookId }}"><div class="set-box row">
+                                <div class="col-2"><i class="fa fa-facebook-square" aria-hidden="true"></i></div>
+                                <div class="col">
+                                        <span class="set-text">Mi facebook</span></div>
+                                </div></a>
+
+                            <div id="photo-delete" class="set-box row">
+                                <div class="col-2"><i class="fa fa-user-circle" aria-hidden="true"></i></div>
+                                <div class="col"><span class="set-text">status</span></div>
+                            </div>
+
+                            <div id="photo-activity2" class="set-box row">
+                                <div class="col-2"><i class="fa fa-user-plus" aria-hidden="true"></i></div>
+                                <div class="col"><span class="set-text">Agregar usuario</span></div>
+                            </div>
+
+                            <div id="photo-activity2" class="set-box row">
+                                <div class="col-2"><i class="fa fa-user-times"
+                                                      aria-hidden="true"></i></div>
+                                <div class="col"><span class="set-text">Eliminar usuario</span></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 m-1"></div>
+            </div>
+
+            <div id="user-paneq" class="ui-box row m-1">
+                <div class="col-md-3"></div>
+                <div class="col-md-9 row">
+                    <div class="col">
+                        <h6 class="d-inline-block">
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                {{ user.firstname ~' '~ user.lastname }}
+                                {% if '@' not in user.username %}
+                                    ( {{ user.username }} )
+                                {% endif %}
+                            {% endif %}
+                            Gomenazai Tineo
+                        </h6>
+                    </div>
+                    <div class="col-3 text-right mt-0 mt-sm-2  justify-content-center align-self-center">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="user-info-boxq" class="row m-1 " >
+                <div class="col-md-3"></div>
+                <div class="col-md-9">
+                    <div class="row" >
+                        <div class="col-8 col-sm-9 h-100">
+                        <div id="informationq" class="ui-box ">
+                            <div class="row">
+                                <div class="col-md-10 mt-1"><span>INFORMACION DEL REGISTRANTE</span></div>
+                                <div class="col-md-1 mt-1 mb-1 text-right">
+                                    <a class="btn btn-outline-secondary btn-sm"
+                                       href="{{ path("profile_user_edit") }}"> Editar </a>
+                                </div>
+                            </div>
+                            <div class="row">
+                            <div class="col-md-6">
+                                <dl class="row">
+                                    <dt class="col-sm-6">Registrado desde</dt>
+                                    <dd class="col-sm-6">{{ user.createdAt|date("d/m/Y") }}.</dd>
+
+
+                                    <dt class="col-sm-6">Genero</dt>
+                                    <dd class="col-sm-6">{{ user.gender|default('(sin definir)') }}.</dd>
+
+                                    <dt class="col-sm-6">Idioma</dt>
+                                    <dd class="col-sm-6">{{ user.language|default('(sin definir)') }}.</dd>
+
+                                    <dt class="col-sm-6">Ubicación</dt>
+                                    <dd class="col-sm-6">{{ user.location|default('(sin definir)') }}.</dd>
+
+                                    <dt class="col-sm-6">Cumpleaños</dt>
+                                    <dd class="col-sm-6">{{ user.birthday|date("d/m/Y")|default('(sin definir)') }}.</dd>
+                                </dl>
+
+                            </div>
+                            <div class="col-md-6">
+
+                                <dl class="row">
+
+                                    <dt class="col-sm-6">Estado Civil</dt>
+                                    <dd class="col-sm-6">{{ user.civilStatus|default('(sin definir)') }}</dd>
+                                    <dt class="col-sm-6">Celular</dt>
+                                    <dd class="col-sm-6">cellphone</dd>
+                                </dl>
+
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="col-4 col-sm-3 " >
+                            <div id="bussiness-counterq" class="ui-box text-center">
+                                <i class="material-icons md-48 d-md-none mt-4" >pin_drop</i>
+                                <span class="d-none d-md-block mt-1" style="font-size: 10px">ESTABLECIMIENTOS REGISTRADOS  </span>
+                                <span class="h3 d-block mt-4 mb-4" style="font-size: 45px">999</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="main-content" class="row">
+                <div class="col-md-5">
+                {% include 'default/sidebar.html.twig'  %}
+                </div>
+                <div class="col-md-7">
+                <div id="main-sideq">
+                    <div class="ui-box">
+                        {% block main_content%}
+                        {% endblock %}
+
+
+                    </div>
+                    {% include 'footer.html.twig' %}
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="fb-root"></div>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

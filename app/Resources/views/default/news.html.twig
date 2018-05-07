@@ -1,0 +1,21 @@
+{% extends 'default/master.html.twig' %}
+
+{% block main_content%}
+    <h1>Ma</h1>
+
+    <select class="js-example-basic-single">
+        <optgroup label="Hajima">
+            <option value="AL">Alabama</option>
+            <option value="WY">Wyoming</option>
+            <option value="WPE">Peru</option>
+        </optgroup>
+    </select>
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+{% endblock %}
