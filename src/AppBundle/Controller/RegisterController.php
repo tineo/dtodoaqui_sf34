@@ -7,6 +7,8 @@
  */
 
 namespace AppBundle\Controller;
+use AppBundle\Entity\Category;
+use AppBundle\Entity\Subcategory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -22,8 +24,16 @@ class RegisterController extends Controller
   public function sistarAction(Request $request)
   {
 
+      $repoCategory = $this->getDoctrine()->getRepository(Category::class);
+      $repoSubcategory = $this->getDoctrine()->getRepository(Subcategory::class);
 
-    return $this->render('register/index.html.twig');
+      $categories = $repoCategory->findAll();
+      $subcategories = $repoSubcategory->findAll();
+
+      return $this->render('register/index.html.twig', array(
+          'categories' => $categories,
+          'subcategories' => $subcategories
+      ));
 
   }
 

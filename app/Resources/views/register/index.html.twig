@@ -22,6 +22,7 @@
                     </li>
                 </ul>
             </div>#}
+
             <form>
                 <h3>Registra el nombre y categoria</h3>
                 <div class="form-group">
@@ -32,16 +33,16 @@
 
                     <div class="row">
                         <div class="col">
-                            <input type="email"
+                            <input type="text"
                                    class="form-control form-control-sm"
-                                   id="exampleInputEmail1"
-                                   aria-describedby="emailHelp"
+                                   id="nombrecomercial"
+                                   aria-describedby="nombrelHelp"
                                    placeholder="">
                         </div>
 
                     </div>
 
-                    <small id="emailHelp"
+                    <small id="nombrelHelp"
                            class="form-text text-muted">
                         Ingresa el nombre del negocio a registrar.
                     </small>
@@ -55,61 +56,66 @@
 
                     <div class="row">
                         <div class="col">
-                            <select class="js-example-basic-multiple form-control" name="states[]" multiple="multiple"  style="width:100%;">
-                                <option value="AL">Categoria 1</option>
-                                <option value="WY">Wyoming</option>
-                                <option value="WY">Alaska</option>
-                                <option value="WY">NEbraska</option>
+                            <select class="js-example-basic-multiple form-control" name="subcategories[]" multiple="multiple"  style="width:100%;" aria-describedby="categorieslHelp">
+
+                                {% for cat in categories %}
+                                <optgroup label="{{ cat.name }}">
+                                    {% for subcat in subcategories if cat.id == subcat.category.id %}
+                                    <option value="{{ subcat.id }}">{{ subcat.name }}</option>
+                                    {% endfor %}
+                                </optgroup>
+                                {% endfor %}
+
                             </select>
                         </div>
                     </div>
 
-                    <small id="emailHelp"
+                    <small id="categorieslHelp"
                            class="form-text text-muted">
-                        Selecciona la o las categorias a la cual pertenece
+                        Seleccione categoria y subcategorias
                     </small>
 
                 </div>
 
 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">
+                    <label for="exampleInputUbigeo">
                         Pais / Ciudad / Distrito
                     </label>
                     <div class="row">
                         <div class="col-sm-3 mt-1">
-                            <select class="form-control form-control-sm">
+                            <select class="form-control form-control-sm" id="ddpais">
                                 <option>Peru</option>
                                 <option>Argentina</option>
                                 <option>USA</option>
                             </select>
-                            <small id="emailHelp"
+                            <small id="paisHelp"
                                    class="form-text text-muted">
-                                Ingresa el nombre del negocio a registrar.
+                                Selecciona pais.
                             </small>
                         </div>
 
                         <div class="col-sm-4 mt-1">
-                            <select class="form-control form-control-sm">
+                            <select class="form-control form-control-sm" id="ddciudad">
                                 <option>Peru</option>
                                 <option>Argentina</option>
                                 <option>USA</option>
                             </select>
-                            <small id="emailHelp"
+                            <small id="ciudadHelp"
                                    class="form-text text-muted">
-                                Ingresa el nombre del negocio a registrar.
+                                Selecciona ciudad.
                             </small>
                         </div>
 
                         <div class="col-sm-5 mt-1">
-                            <select class="form-control form-control-sm">
+                            <select class="form-control form-control-sm" id="dddistrito">
                                 <option>Peru</option>
                                 <option>Argentina</option>
                                 <option>USA</option>
                             </select>
-                            <small id="emailHelp"
+                            <small id="distritoHelp"
                                    class="form-text text-muted">
-                                Ingresa el nombre del negocio a registrar.
+                                Selecciona distrito.
                             </small>
                         </div>
 
@@ -119,44 +125,44 @@
                 <!-- Direccion -->
                 <div class="form-group">
 
-                    <label for="exampleInputEmail1">
+                    <label for="inputAddress">
                         Direccion
                     </label>
 
                     <div class="row">
                         <div class="col">
-                            <input type="email"
+                            <input type="text"
                                    class="form-control form-control-sm"
-                                   id="exampleInputEmail1"
-                                   aria-describedby="emailHelp"
+                                   id="inputAddress"
+                                   aria-describedby="inputAddressHelp"
                                    placeholder="">
                         </div>
 
                     </div>
 
-                    <small id="emailHelp"
+                    <small id="inputAddressHelp"
                            class="form-text text-muted">
-                        Ingresa el nombre del negocio a registrar.
+                        Ingresa la direccion del establecimiento.
                     </small>
                 </div>
                 <!-- P.Web-->
                 <div class="form-group">
 
-                    <label for="exampleInputEmail1">
+                    <label for="inputPagweb">
                         Pagina web
                     </label>
 
 
-                    <input type="email"
+                    <input type="text"
                            class="form-control form-control-sm"
-                           id="exampleInputEmail1"
-                           aria-describedby="emailHelp"
+                           id="inputPagweb"
+                           aria-describedby="pagwebHelp"
                            placeholder="">
 
 
-                    <small id="emailHelp"
+                    <small id="pagwebHelp"
                            class="form-text text-muted">
-                        Ingresa el nombre del negocio a registrar.
+                        Ingrese la direccion web del establecimiento.
                     </small>
                 </div>
 
@@ -165,21 +171,21 @@
                         <!-- Telefono -->
                         <div class="form-group">
 
-                            <label for="exampleInputEmail1">
+                            <label for="inputPhone">
                                 Telefono
                             </label>
 
 
-                            <input type="email"
+                            <input type="tel"
                                    class="form-control form-control-sm"
-                                   id="exampleInputEmail1"
-                                   aria-describedby="emailHelp"
+                                   id="inputPhone"
+                                   aria-describedby="phoneHelp"
                                    placeholder="">
 
 
-                            <small id="emailHelp"
+                            <small id="phoneHelp"
                                    class="form-text text-muted">
-                                Ingresa el nombre del negocio a registrar.
+                                Ingresa el numero del negocio a registrar.
                             </small>
                         </div>
                     </div>
