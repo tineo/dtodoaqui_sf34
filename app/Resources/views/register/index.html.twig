@@ -277,6 +277,7 @@
                     </div>
                 </div>
 
+                <div id="demo"></div>
                 <div id="map"></div>
 
 
@@ -441,61 +442,113 @@
     <!-- ... -->
     <script src="{{ asset('build/js/register.js') }}"></script>
 
-
-
     <script>
+
+      function handlePermission() {
+        navigator.permissions.query({name:'geolocation'}).then(function(result) {
+          if (result.state == 'granted') {
+            report(result.state);
+            //geoBtn.style.display = 'none';
+          } else if (result.state == 'prompt') {
+            report(result.state);
+            //geoBtn.style.display = 'none';
+            navigator.geolocation.getCurrentPosition(revealPosition,positionDenied,geoSettings);
+          } else if (result.state == 'denied') {
+            report(result.state);
+            //geoBtn.style.display = 'inline';
+          }
+          result.onchange = function() {
+            report(result.state);
+          }
+        });
+      }
+
+      function report(state) {
+        console.log('Permission ' + state);
+      }
+
+      handlePermission();
+
+
+
       var map;
       var marker;
 
       function initMap() {
         var uluru = {lat: -25.363, lng: 131.044};
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
+          zoom: 15,
           center: uluru
         });
-        marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        })
 
-        var boxText = document.createElement("div");
-        boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
-        boxText.innerHTML = "City Hall, Sechelt<br>British Columbia<br>Canada";
-        var myOptions = {
-          content: boxText
-          ,disableAutoPan: false
-          ,maxWidth: 0
-          ,pixelOffset: new google.maps.Size(-140, 0)
-          ,zIndex: null
-          ,boxStyle: {
-            //background: "url('tipbox.gif') no-repeat"
-            //,
-            opacity: 0.75
-            ,width: "280px"
-          }
-          ,closeBoxMargin: "10px 2px 2px 2px"
-          ,closeBoxURL: "https://www.google.com/intl/en_us/mapfiles/close.gif"
-          ,infoBoxClearance: new google.maps.Size(1, 1)
-          ,isHidden: false
-          ,pane: "floatPane"
-          ,enableEventPropagation: false
-        };
-        google.maps.event.addListener(marker, "click", function (e) {
-          ib.open(map, this);
-        });
-        var ib = new InfoBox(myOptions);
-        ib.open(map, marker);
-
+        return map;
       }
-
-
     </script>
 
     <script>
 
       $( document ).ready(function() {
         // Handler for .ready() called.
+
+        navigator.geolocation.watchPosition(function(position) {
+              console.log("i'm tracking you!");
+            },
+            function (error) {
+              if (error.code == error.PERMISSION_DENIED)
+                console.log("you denied me :-(");
+            });
+
+
+        getLocation();
+
         initMap();
+
+
+
       });
+
+      var x = document.getElementById("demo");
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(setPosition);
+        } else {
+          x.innerHTML = "Geolocation is not supported by this browser.";
+          alert("Geolocation is not supported by this browser.")
+        }
+      }
+      function showPosition(position) {
+        x.innerHTML = "Latitude: " + position.coords.latitude +
+            "<br>Longitude: " + position.coords.longitude;
+      }
+
+      function setPosition(position) {
+        map.setCenter(
+            new google.maps.LatLng(
+                position.coords.latitude,
+                position.coords.longitude ) );
+      }
+
+
     </script>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+    #map {
+    position: relative;
+    }
+
+    #map:after {
+    width: 22px;
+    height: 40px;
+    display: block;
+    content: ' ';
+    position: absolute;
+    top: 50%; left: 50%;
+    margin: -40px 0 0 -11px;
+    background: url('https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi_hdpi.png');
+    background-size: 22px 40px; /* Since I used the HiDPI marker version this compensates for the 2x size */
+    pointer-events: none; /* This disables clicks on the marker. Not fully supported by all major browsers, though */
+    }
+</style>
 {% endblock %}

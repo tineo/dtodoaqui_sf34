@@ -1,4 +1,4 @@
-var Dropzone = require("dropzone");
+//var Dropzone = require("dropzone");
 require("select2");
 
 
@@ -9,7 +9,7 @@ $(document).ready(function() {
     //dropdownAutoWidth: true
   });
 });
-
+/*
 Dropzone.autoDiscover = false;
 
 Dropzone.options.dropzoneArea = {
@@ -27,10 +27,9 @@ Dropzone.options.dropzoneArea = {
 
 $(function () {
 
-  /*$("#dropzone-area").dropzone({
-      url: "/file/upload",
-
-  });*/
+  //$("#dropzone-area").dropzone({
+  //    url: "/file/upload",
+  //});
 
 
   //je récupère l'action où sera traité l'upload en PHP
@@ -56,3 +55,4 @@ $(function () {
     $(".dz-details").html("<span class='advice'>Haz click para reemplazar la imagen</span>");
   });
 });
+*/

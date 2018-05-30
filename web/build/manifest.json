@@ -1,17 +1,17 @@
 {
   "build/js/app.js": "/build/js/app.js",
-  "build/js/register.js": "/build/js/register.js",
   "build/js/place.js": "/build/js/place.js",
+  "build/js/register.js": "/build/js/register.js",
   "build/js/landin.js": "/build/js/landin.js",
   "build/css/app.css": "/build/css/app.css",
-  "build/fonts/fontawesome-webfont.eot": "/build/fonts/fontawesome-webfont.674f50d2.eot",
-  "build/fonts/materialdesignicons-webfont.woff2": "/build/fonts/materialdesignicons-webfont.32562ea5.woff2",
-  "build/images/fontawesome-webfont.svg": "/build/images/fontawesome-webfont.912ec66d.svg",
   "build/fonts/materialdesignicons-webfont.ttf": "/build/fonts/materialdesignicons-webfont.a33808e1.ttf",
-  "build/fonts/fontawesome-webfont.woff2": "/build/fonts/fontawesome-webfont.af7ae505.woff2",
-  "build/images/materialdesignicons-webfont.svg": "/build/images/materialdesignicons-webfont.07c3c549.svg",
+  "build/fonts/fontawesome-webfont.eot": "/build/fonts/fontawesome-webfont.674f50d2.eot",
   "build/fonts/fontawesome-webfont.ttf": "/build/fonts/fontawesome-webfont.b06871f2.ttf",
-  "build/fonts/materialdesignicons-webfont.woff": "/build/fonts/materialdesignicons-webfont.40f483d6.woff",
+  "build/fonts/fontawesome-webfont.woff": "/build/fonts/fontawesome-webfont.fee66e71.woff",
+  "build/fonts/fontawesome-webfont.woff2": "/build/fonts/fontawesome-webfont.af7ae505.woff2",
   "build/fonts/materialdesignicons-webfont.eot": "/build/fonts/materialdesignicons-webfont.c28acdf1.eot",
-  "build/fonts/fontawesome-webfont.woff": "/build/fonts/fontawesome-webfont.fee66e71.woff"
+  "build/images/materialdesignicons-webfont.svg": "/build/images/materialdesignicons-webfont.07c3c549.svg",
+  "build/images/fontawesome-webfont.svg": "/build/images/fontawesome-webfont.912ec66d.svg",
+  "build/fonts/materialdesignicons-webfont.woff": "/build/fonts/materialdesignicons-webfont.40f483d6.woff",
+  "build/fonts/materialdesignicons-webfont.woff2": "/build/fonts/materialdesignicons-webfont.32562ea5.woff2"
 }
