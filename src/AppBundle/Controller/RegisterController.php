@@ -19,7 +19,7 @@ class RegisterController extends Controller
 {
 
   /**
-   * @Route("/registerw", name="register")
+   * @Route("/newplace", name="register")
    */
   public function sistarAction(Request $request)
   {
@@ -48,17 +48,17 @@ class RegisterController extends Controller
         // configuration values
         $directory = $this->get('kernel')->getRootDir() . '/../web' . $request->getBasePath() . '/files/';
 
-    // $file will be an instance of Symfony\Component\HttpFoundation\File\UploadedFile
-    foreach ($files as $uploadedFile) {
-        // name the resulting file
-        $name = $uploadedFile->getClientOriginalName();
-        $file = $uploadedFile->move($directory, $name);
+        // $file will be an instance of Symfony\Component\HttpFoundation\File\UploadedFile
+        foreach ($files as $uploadedFile) {
+            // name the resulting file
+            $name = $uploadedFile->getClientOriginalName();
+            $file = $uploadedFile->move($directory, $name);
 
-        // do something with the actual file
-        //$this->doSomething($file);
+            // do something with the actual file
+            //$this->doSomething($file);
+        }
+
+        // return data to the frontend
+        return new JsonResponse([]);
     }
-
-    // return data to the frontend
-    return new JsonResponse([]);
-}
 }
