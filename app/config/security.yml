@@ -64,5 +64,6 @@ security:
         - { path: ^/activities, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/establishment/[0-9]*$, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_FULLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        #- { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/admin/, role: IS_AUTHENTICATED_FULLY }
         #- { path: /.*, role: IS_AUTHENTICATED_FULLY }

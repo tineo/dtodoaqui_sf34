@@ -182,5 +182,37 @@ class DefaultController extends BaseController
         return $this->render('default/userguide.html.twig');
     }
 
+    /**
+     * @Route("/test", name="userguide")
+     */
+    public function mailingAction(Request $request, \Swift_Mailer $mailer)
+    {
+        $message = (new \Swift_Message('Hello Email'))
+            ->setFrom('itsudatte01@gmail.com')
+            ->setTo('itsudatte01@gmail.com')
+            ->setBody(
+                $this->renderView(
+                // templates/emails/registration.html.twig
+                    'emails/registration.html.twig',
+                    array('name' => "xxx")
+                ),
+                'text/html'
+            )
+            /*
+             * If you also want to include a plaintext version of the message
+            ->addPart(
+                $this->renderView(
+                    'emails/registration.txt.twig',
+                    array('name' => $name)
+                ),
+                'text/plain'
+            )
+            */
+        ;
+
+        $mailer->send($message);
+        return new Response(200);
+    }
+
 
 }
