@@ -78,6 +78,24 @@ $primary:    $font-pinksoo-color;
     font-size: $font-size-primary;
   }
 }*/
+
+.select2-container--bootstrap .select2-selection--single{
+  height: calc(1.5rem + 2px);line-height: 1;
+
+}
+ul.parsley-errors-list{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li{
+    color: #bf261a
+  }
+}
+input.parsley-error{
+  border: solid 1px #bf261a;
+}
+
 li[aria-selected]{
   color: $font-pinksoo-color;
 }

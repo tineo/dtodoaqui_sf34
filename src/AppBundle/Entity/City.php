@@ -11,7 +11,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CityRepository")
  * @ORM\Table(name="city")
  */
 class City
@@ -150,4 +150,30 @@ class City
 
 
 
+
+    /**
+     * Add district.
+     *
+     * @param \AppBundle\Entity\District $district
+     *
+     * @return City
+     */
+    public function addDistrict(\AppBundle\Entity\District $district)
+    {
+        $this->districts[] = $district;
+
+        return $this;
+    }
+
+    /**
+     * Remove district.
+     *
+     * @param \AppBundle\Entity\District $district
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeDistrict(\AppBundle\Entity\District $district)
+    {
+        return $this->districts->removeElement($district);
+    }
 }

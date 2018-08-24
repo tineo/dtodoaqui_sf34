@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CountryRepository")
  * @ORM\Table(name="country")
  */
 class Country
@@ -145,4 +145,30 @@ class Country
         return $this;
     }
 
+
+    /**
+     * Add city.
+     *
+     * @param \AppBundle\Entity\City $city
+     *
+     * @return Country
+     */
+    public function addCity(\AppBundle\Entity\City $city)
+    {
+        $this->cities[] = $city;
+
+        return $this;
+    }
+
+    /**
+     * Remove city.
+     *
+     * @param \AppBundle\Entity\City $city
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeCity(\AppBundle\Entity\City $city)
+    {
+        return $this->cities->removeElement($city);
+    }
 }

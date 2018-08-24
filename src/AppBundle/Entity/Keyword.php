@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Type;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="KeywordRepository")
  * @ORM\Table(name="keyword")
  */
 class Keyword {

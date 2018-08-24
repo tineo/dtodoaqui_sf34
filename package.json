@@ -3,15 +3,11 @@
   "version": "1.2.0",
   "dependencies": {
     "@symfony/webpack-encore": "^0.20.1",
+    "axios": "^0.18.0",
     "babel-preset-react": "^6.24.1",
-    "jquery": "^3.2.1",
-    "prop-types": "^15.6.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "sass-loader": "^6.0.6",
-
     "bootstrap": "4.0.0-beta.3",
     "corejs-typeahead": "^1.2.1",
+    "cropperjs": "^1.4.1",
     "dropzone": "^5.2.0",
     "flickity": "^2.0.10",
     "font-awesome": "^4.7.0",
@@ -26,11 +22,18 @@
     "gulp-sass": "^3.1.0",
     "gulp-uglify": "^2.0.1",
     "gulp-uglifyjs": "^0.6.2",
+    "jquery": "^3.3.1",
     "jquery-backstretch": "^2.1.16",
+    "jquery-cropper": "^1.0.0",
     "material-design-icons": "^3.0.1",
     "mdi": "^2.1.19",
+    "parsleyjs": "^2.8.1",
     "popper.js": "^1.12.9",
+    "prop-types": "^15.6.0",
     "pump": "^1.0.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "sass-loader": "^6.0.6",
     "select2": "^4.0.6-rc.1",
     "select2-bootstrap-theme": "https://github.com/angel-vladov/select2-bootstrap-theme.git",
     "select2-bootstrap4-theme": "^1.0.0",
@@ -46,7 +49,5 @@
   "scripts": {
     "postinstall": "yarn run encore production"
   },
-  "devDependencies": {
-
-  }
+  "devDependencies": {}
 }

@@ -1,32 +1,14 @@
 {% extends 'default/master.html.twig' %}
 
 {% block body %}
-
-
     <div id="app-wrapper">
 
-
         <div class="container">
-            <!-- Content here -->
-            {#<div class="row">
-                <ul class="breadcrumb d-block mr-1 ml-1">
-                    <li class="completed">
-                        <a href="javascript:void(0);">about</a>
-                    </li>
-                    </li>
-                    <li class="active">
-                        <a href="javascript:void(0);">business</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);">gallery</a>
-                    </li>
-                </ul>
-            </div>#}
 
-            <form>
+            <form method="POST" data-parsley-validate >
                 <h3>Registra el nombre y categoria</h3>
-                <div class="form-group">
 
+                <div class="form-group">
                     <label for="exampleInputEmail1">
                         Nombre comercial
                     </label>
@@ -37,11 +19,11 @@
                                    class="form-control form-control-sm"
                                    id="nombrecomercial"
                                    aria-describedby="nombrelHelp"
-                                   placeholder="">
+                                   placeholder=""
+                                   required=""
+                            >
                         </div>
-
                     </div>
-
                     <small id="nombrelHelp"
                            class="form-text text-muted">
                         Ingresa el nombre del negocio a registrar.
@@ -49,15 +31,12 @@
                 </div>
 
                 <div class="form-group">
-
                     <label for="exampleInputEmail1">
                         Categoria(s)
                     </label>
-
                     <div class="row">
                         <div class="col">
-                            <select class="js-example-basic-multiple form-control" name="subcategories[]" multiple="multiple"  style="width:100%;" aria-describedby="categorieslHelp">
-
+                            <select id="subcategorias" class="js-example-basic-multiple form-control" name="subcategories[]" multiple="multiple"  style="width:100%;" aria-describedby="categorieslHelp">
                                 {% for cat in categories %}
                                 <optgroup label="{{ cat.name }}">
                                     {% for subcat in subcategories if cat.id == subcat.category.id %}
@@ -65,18 +44,14 @@
                                     {% endfor %}
                                 </optgroup>
                                 {% endfor %}
-
                             </select>
                         </div>
                     </div>
-
                     <small id="categorieslHelp"
                            class="form-text text-muted">
                         Seleccione categoria y subcategorias
                     </small>
-
                 </div>
-
 
                 <div class="form-group">
                     <label for="exampleInputUbigeo">
@@ -85,9 +60,7 @@
                     <div class="row">
                         <div class="col-sm-3 mt-1">
                             <select class="form-control form-control-sm" id="ddpais">
-                                <option>Peru</option>
-                                <option>Argentina</option>
-                                <option>USA</option>
+
                             </select>
                             <small id="paisHelp"
                                    class="form-text text-muted">
@@ -97,9 +70,7 @@
 
                         <div class="col-sm-4 mt-1">
                             <select class="form-control form-control-sm" id="ddciudad">
-                                <option>Peru</option>
-                                <option>Argentina</option>
-                                <option>USA</option>
+
                             </select>
                             <small id="ciudadHelp"
                                    class="form-text text-muted">
@@ -109,9 +80,7 @@
 
                         <div class="col-sm-5 mt-1">
                             <select class="form-control form-control-sm" id="dddistrito">
-                                <option>Peru</option>
-                                <option>Argentina</option>
-                                <option>USA</option>
+
                             </select>
                             <small id="distritoHelp"
                                    class="form-text text-muted">
@@ -180,7 +149,10 @@
                                    class="form-control form-control-sm"
                                    id="inputPhone"
                                    aria-describedby="phoneHelp"
-                                   placeholder="">
+                                   placeholder=""
+                                   data-parsley-type="digits"
+                                   required=""
+                            >
 
 
                             <small id="phoneHelp"
@@ -188,8 +160,6 @@
                                 Ingresa el numero del negocio a registrar.
                             </small>
                         </div>
-                    </div>
-                    <div class="col">
                         <!-- Email -->
                         <div class="form-group">
 
@@ -200,9 +170,30 @@
 
                             <input type="email"
                                    class="form-control form-control-sm"
-                                   id="exampleInputEmail1"
+                                   id="inputEmail"
+                                   data-parsley-trigger="change"
                                    aria-describedby="emailHelp"
-                                   placeholder="">
+                                   placeholder=""
+                                   data-parsley-type="email">
+
+
+                            <small id="emailHelp"
+                                   class="form-text text-muted">
+                                Ingresa el nombre del negocio a registrar.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <!-- Foto -->
+                        <div class="form-group">
+
+                            <label for="exampleInputEmail1">
+                                Logo
+                            </label>
+
+
+                            <input type='file' id="imgInp" />
+                            <img id="blah" src="#" alt="your image" />
 
 
                             <small id="emailHelp"
@@ -283,7 +274,7 @@
 
                 <div class="row">
                 <div class="col-sm"></div>
-                <div class="col-sm"><input type="submit"
+                <div class="col-sm"><input type="submit" id="new-register"
                                         class="btn btn-primary btn-sm btn-block mt-3 mb-3 mb-1"
                                         value="Registrar" /></div>
                 <div class="col-sm"></div>
@@ -291,257 +282,18 @@
 
             </form>
         </div>
-
-
-
-        <div class="container">
-            {#<div class="ui-register-box">
-                <h2>INFORMACION DEL ESTABLECIMIENTO</h2>
-
-                <div>
-                    <div class="ui-reg-label">
-                        <h5>NOMBRE COMERCIAL</h5>
-                    </div>
-                    <div class="ui-reg-input">
-                        <input type="text" ref="nom_comercial"
-                               data-tip="Ingrese <br />Nombre Comercial"
-                               data-place="left"
-                               data-multiline="true"
-                        />
-                    </div>
-                    <div class="clearing" />
-                </div>
-
-                <div>
-                    <div class="ui-reg-label">
-                        <h5>LOGO</h5>
-                    </div>
-                    <div class="ui-reg-input">
-                        <div  action="/file/upload"
-                              class="dropzone dropzone-reg"
-                              id="dropzone-area">
-
-                        </div>
-                        <br />
-                    </div>
-                    <div class="clearing" />
-                </div>
-
-
-                <div>
-                    <div class="ui-reg-label">
-                        <h5>CAREGORIA</h5>
-                    </div>
-                    <div class="ui-reg-input sel-categorias">
-                        <input type="text" />
-                    </div>
-                    <div class="clearing" />
-                </div>
-
-                <div>
-                    <div class="ui-reg-label">
-                        <h5>PAIS / CIUDAD / DISTRITO</h5>
-                    </div>
-                    <div class="ui-reg-input ui-reg-input-3col">
-                        <select></select>
-                        <select></select>
-                        <select></select>
-                    </div>
-                    <div class="clearing" />
-                </div>
-                <div>
-                    <div class="ui-reg-label">
-                        <h5>DIRECCION</h5>
-                    </div>
-                    <div class="ui-reg-input">
-                        <input type="text" />
-                    </div>
-                    <div class="clearing" />
-                </div>
-                <div>
-                    <div class="ui-reg-label">
-                        <h5>TELEFONO</h5>
-                    </div>
-                    <div class="ui-reg-input">
-                        <input type="text" />
-                    </div>
-                    <div class="clearing" />
-                </div>
-                <div>
-                    <div class="ui-reg-label">
-                        <h5>PAGINA WEB</h5>
-                    </div>
-                    <div class="ui-reg-input">
-                        <input type="text" />
-                    </div>
-                    <div class="clearing" />
-                </div>
-                <div>
-                    <div class="ui-reg-label">
-                        <h5>EMAIL</h5>
-                    </div>
-                    <div class="ui-reg-input">
-                        <input type="text" ref="email"
-                               data-tip="Ingrese Email"
-                               data-place="left"
-                        />
-                    </div>
-                    <div class="clearing" />
-                </div>
-
-                <div>
-                    <div class="ui-reg-label">
-                        <h5>HORARIO DE ATENCION</h5>
-                    </div>
-
-                    <div class="ui-reg-input reg-atencion">
-
-                        <input type="checkbox"  /> Abierto todo el tiempo<br />
-
-                        <select name="open_hour" placeholder="HH" ></select>
-
-                        <select name="open_min" placeholder="MM" ></select>
-
-                        <select name="open_meri" placeholder="MR" ></select>
-
-
-
-                        <select name="close_hour" placeholder="HH" ></select>
-
-                        <select name="close_min" placeholder="MM" ></select>
-
-                        <select name="close_meri" placeholder="MR" ></select>
-
-                    </div>
-                    <div class="clearing" />
-                </div>
-
-                <div class="ui-map-register">
-
-
-                    <div class="clearing"></div>
-                </div>
-
-                <div id="map"></div>
-
-
-                <div class="btn-register-est">
-                    <input  type="button" value="REGISTRAR ESTABLECIEMINTO"/>
-                </div>
-
-
-            </div>#}
-        </div>
     </div>
 {% endblock %}
 
 {% block javascripts %}
 
     {{  parent()  }}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="{{ asset('js/infobox.js') }}"></script>
     <!-- ... -->
     <script src="{{ asset('build/js/register.js') }}"></script>
 
     <script>
-
-        function positionDenied(){
-
-        }
-        function revealPosition(){
-
-        }
-
-      function handlePermission() {
-        navigator.permissions.query({name:'geolocation'}).then(function(result) {
-          if (result.state == 'granted') {
-            report(result.state);
-            //geoBtn.style.display = 'none';
-          } else if (result.state == 'prompt') {
-            report(result.state);
-            //geoBtn.style.display = 'none';
-            navigator.geolocation.getCurrentPosition(revealPosition,positionDenied);
-          } else if (result.state == 'denied') {
-            report(result.state);
-            //geoBtn.style.display = 'inline';
-          }
-          result.onchange = function() {
-            report(result.state);
-          }
-        });
-      }
-
-      function report(state) {
-        console.log('Permission ' + state);
-      }
-
-      handlePermission();
-
-
-
-      var map;
-      var marker;
-
-      function initMap() {
-        var uluru = {lat: -25.363, lng: 131.044};
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-          center: uluru
-        });
-
-        return map;
-      }
-
-
-
-      $( document ).ready(function() {
-        // Handler for .ready() called.
-
-        navigator.geolocation.watchPosition(function(position) {
-              console.log("i'm tracking you!");
-            },
-            function (error) {
-              if (error.code == error.PERMISSION_DENIED)
-                console.log("you denied me :-(");
-            });
-
-
-        getLocation();
-
-        initMap();
-
-
-
-      });
-
-      var x = document.getElementById("demo");
-      function getLocation() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(setPosition);
-        } else {
-          x.innerHTML = "Geolocation is not supported by this browser.";
-          alert("Geolocation is not supported by this browser.")
-        }
-      }
-      function showPosition(position) {
-        x.innerHTML = "Latitude: " + position.coords.latitude +
-            "<br>Longitude: " + position.coords.longitude;
-      }
-
-      function setPosition(position) {
-
-          if(map === undefined){
-              var uluru = {lat: -25.363, lng: 131.044};
-              map = new google.maps.Map(document.getElementById('map'), {
-                  zoom: 15,
-                  center: uluru
-              });
-          }
-
-        map.setCenter(
-            new google.maps.LatLng(
-                position.coords.latitude,
-                position.coords.longitude ) );
-      }
 
 
     </script>

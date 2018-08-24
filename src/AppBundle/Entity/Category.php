@@ -11,7 +11,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CategoryRepository")
  * @ORM\Table(name="category")
  */
 class Category
@@ -146,4 +146,30 @@ class Category
 
 
 
+
+    /**
+     * Add subcategory.
+     *
+     * @param \AppBundle\Entity\Subcategory $subcategory
+     *
+     * @return Category
+     */
+    public function addSubcategory(\AppBundle\Entity\Subcategory $subcategory)
+    {
+        $this->subcategories[] = $subcategory;
+
+        return $this;
+    }
+
+    /**
+     * Remove subcategory.
+     *
+     * @param \AppBundle\Entity\Subcategory $subcategory
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeSubcategory(\AppBundle\Entity\Subcategory $subcategory)
+    {
+        return $this->subcategories->removeElement($subcategory);
+    }
 }

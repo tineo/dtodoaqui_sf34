@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="FileRepository")
  * @ORM\Table(name="file")
  */
 class File
