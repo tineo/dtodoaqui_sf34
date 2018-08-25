@@ -54,6 +54,11 @@ class Country
         $this->state = 0;
     }
 
+    public function __toString()
+    {
+        // TODO: Implement __toString() method.
+        return $this->getName();
+    }
 
     /**
      * @return mixed

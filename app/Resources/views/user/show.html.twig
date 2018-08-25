@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>User</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ user.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ user.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>{{ user.gender }}</td>
+            </tr>
+            <tr>
+                <th>Birthday</th>
+                <td>{% if user.birthday %}{{ user.birthday|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Civil_status</th>
+                <td>{{ user.civilstatus }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ user.location }}</td>
+            </tr>
+            <tr>
+                <th>Language</th>
+                <td>{{ user.language }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ user.image }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{% if user.createdat %}{{ user.createdat|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Modificated_at</th>
+                <td>{% if user.modificatedat %}{{ user.modificatedat|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Facebook_id</th>
+                <td>{{ user.facebookid }}</td>
+            </tr>
+            <tr>
+                <th>Facebook_access_token</th>
+                <td>{{ user.facebookaccesstoken }}</td>
+            </tr>
+            <tr>
+                <th>Google_id</th>
+                <td>{{ user.googleid }}</td>
+            </tr>
+            <tr>
+                <th>Google_access_token</th>
+                <td>{{ user.googleaccesstoken }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_user_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_user_edit', { 'id': user.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

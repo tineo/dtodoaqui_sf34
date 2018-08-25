@@ -47,7 +47,7 @@ class File
     /**
      * One File has One User.
      * @ORM\OneToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="iduser", referencedColumnName="id")
+     * @ORM\JoinColumn(name="iduser", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $user;
 
