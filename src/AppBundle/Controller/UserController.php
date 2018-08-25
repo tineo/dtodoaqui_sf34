@@ -118,6 +118,7 @@ class UserController extends Controller
         return $this->redirectToRoute('admin_user_index');
     }
 
+
     /**
      * Creates a form to delete a user entity.
      *
