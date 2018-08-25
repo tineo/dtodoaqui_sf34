@@ -225,11 +225,13 @@ class Bussiness
     return $this->links;
   }
 
-  /**
-   * @param mixed $links
-   */
+    /**
+     * @param mixed $links
+     * @return Bussiness
+     */
   public function setLinks($links) {
     $this->links = $links;
+    return $this;
   }
 
   /**
@@ -263,11 +265,13 @@ class Bussiness
     return $this->id_distro;
   }
 
-  /**
-   * @param mixed $id_distro
-   */
+    /**
+     * @param mixed $id_distro
+     * @return Bussiness
+     */
   public function setIdDistro($id_distro) {
     $this->id_distro = $id_distro;
+      return $this;
   }
 
   /**
@@ -277,11 +281,13 @@ class Bussiness
     return $this->id_registar;
   }
 
-  /**
-   * @param mixed $id_registar
-   */
+    /**
+     * @param mixed $id_registar
+     * @return Bussiness
+     */
   public function setIdRegistar($id_registar) {
     $this->id_registar = $id_registar;
+      return $this;
   }
 
 

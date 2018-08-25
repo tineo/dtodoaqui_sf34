@@ -187,7 +187,7 @@
                         <!-- Foto -->
                         <div class="form-group">
 
-                            <label for="exampleInputEmail1">
+                            {#<label for="exampleInputEmail1">
                                 Logo
                             </label>
 
@@ -199,7 +199,7 @@
                             <small id="emailHelp"
                                    class="form-text text-muted">
                                 Ingresa el nombre del negocio a registrar.
-                            </small>
+                            </small>#}
                         </div>
                     </div>
                 </div>
@@ -214,7 +214,7 @@
 
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="">
+                            <input class="form-check-input" type="checkbox" value="" id="chk-open">
                             Abierto todo el tiempo
                         </label>
                     </div>
@@ -227,18 +227,18 @@
                         <!-- H. inicio -->
                         <div class="form-group">
 
-                            <label for="exampleInputEmail1">
+                            <label for="open-time">
                                 Hora de apertura
                             </label>
 
                             <input type="time"
                                    class="form-control form-control-sm"
-                                   id="exampleInputEmail1"
-                                   aria-describedby="emailHelp"
+                                   id="open-time"
+                                   aria-describedby="open-time-help"
                                    placeholder="">
 
 
-                            <small id="emailHelp"
+                            <small id="open-time-help"
                                    class="form-text text-muted">
                                 Ingresa el nombre del negocio a registrar.
                             </small>
@@ -248,19 +248,19 @@
                         <!-- H. cierre -->
                         <div class="form-group">
 
-                            <label for="exampleInputEmail1">
+                            <label for="close-time">
                                 Hora de cierre
                             </label>
 
 
                             <input type="time"
                                    class="form-control form-control-sm"
-                                   id="exampleInputEmail1"
-                                   aria-describedby="emailHelp"
+                                   id="close-time"
+                                   aria-describedby="close-time-help"
                                    placeholder="">
 
 
-                            <small id="emailHelp"
+                            <small id="close-time-help"
                                    class="form-text text-muted">
                                 Ingresa el nombre del negocio a registrar.
                             </small>
@@ -268,7 +268,11 @@
                     </div>
                 </div>
 
-                <div id="demo"></div>
+                <div id="demo">
+                    <input type="hidden" id="latlng" />
+                    <input type="hidden" id="lat" />
+                    <input type="hidden" id="lng" />
+                </div>
                 <div id="map"></div>
 
 

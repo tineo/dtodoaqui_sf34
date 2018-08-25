@@ -7,6 +7,7 @@
  */
 
 namespace AppBundle\Controller;
+use AppBundle\Entity\Bussiness;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Country;
 use AppBundle\Entity\Subcategory;
@@ -17,7 +18,7 @@ use Symfony\Component\Form\Forms;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class RegisterController extends Controller
 {
@@ -142,11 +143,48 @@ class RegisterController extends Controller
     }
 
     /**
-     * @Route("/createplace", name="create_place")
+     * @Route("/ajax/newplace", name="ajax_newplace")
      */
     public function createPlaceAction(Request $request)
     {
 
+        /*
+        nombrecomercial : $("#nombrecomercial").val(),
+                subcategorias : $("#subcategorias").val(),
+                ddpais : $("#ddpais").val(),
+                ddciudad : $("#ddciudad").val(),
+                dddistrito : $("#dddistrito").val(),
+                inputAddress : $("#inputAddress").val(),
+                inputPagweb : $("#inputPagweb").val(),
+                inputPhone : $("#inputPhone").val(),
+                inputEmail : $("#inputEmail").val(),
+                close_time : $("#close-time").val(),
+                open_time : $("#open-time").val(),
+                chk_open : $("#chk-open").prop('checked')
+        */
+        //$request->request->get('nombrecomercial')
+        $userid = 0;
+        if( $this->container->get( 'security.authorization_checker' )->isGranted( 'IS_AUTHENTICATED_FULLY' ) )
+        {
+            $user = $this->container->get('security.token_storage')->getToken()->getUser();
+            $userid = $user->getId();
+        }
+
+        $place =  new Bussiness();
+        $place
+            ->setBusinessName($request->request->get('nombrecomercial'))
+            ->setLongitude($request->request->get('nombrecomercial'))
+            ->setIdDistro($userid)
+            ->setIdRegistar($userid)
+            ->setLatitude($request->request->get('lat'))
+            ->setLongitude($request->request->get('lng'))
+            ->setZoom(15)
+            ->setLinks(array())
+            ;
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($place);
+        $em->flush();
+        return new JsonResponse($place->getId());
     }
 
 }

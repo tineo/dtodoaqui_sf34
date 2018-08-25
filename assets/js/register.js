@@ -70,8 +70,8 @@ $(document).ready(function() {
         ajax: {
             url: '/ajax/countries',
             processResults: function (res) {
-                console.log(res)
-                console.log(JSON.parse(res))
+                //console.log(res)
+                //console.log(JSON.parse(res))
                 // Tranforms the top-level key of the response object from 'items' to 'results'
                 let hashmap  = JSON.parse(res)
                 let results = []
@@ -79,7 +79,7 @@ $(document).ready(function() {
                     results.push({id : hashmap[key].id, text: hashmap[key].name, disabled: false})
                 });
 
-                console.log(results);
+                //console.log(results);
                 return {
                     results: results
                 };
@@ -89,14 +89,14 @@ $(document).ready(function() {
 
     $('#ddpais').on('select2:select', function (e) {
         var data = e.params.data;
-        console.log(data);
+        //console.log(data);
         $("#ddciudad").prop("disabled", false).val(null).trigger('change.select2');
         $("#dddistrito").prop("disabled", true).val(null).trigger('change.select2');
     });
 
     $('#ddciudad').on('select2:select', function (e) {
         var data = e.params.data;
-        console.log(data);
+        //console.log(data);
         $("#dddistrito").prop("disabled", false).val(null).trigger('change.select2');
     });
 
@@ -110,8 +110,8 @@ $(document).ready(function() {
             },
             //url: '/ajax/cities?c='+$("#ddpais").val(),
             processResults: function (res) {
-                console.log(res)
-                console.log(JSON.parse(res))
+                //console.log(res)
+                //console.log(JSON.parse(res))
                 // Tranforms the top-level key of the response object from 'items' to 'results'
                 let hashmap  = JSON.parse(res)
                 let results = []
@@ -119,7 +119,7 @@ $(document).ready(function() {
                     results.push({id : hashmap[key].id, text: hashmap[key].name, disabled: false})
                 });
 
-                console.log(results);
+                //console.log(results);
                 return {
                     results: results
                 };
@@ -136,8 +136,8 @@ $(document).ready(function() {
             },
             //url: '/ajax/districts?c='+$("#ddciudad").val(),
             processResults: function (res) {
-                console.log(res)
-                console.log(JSON.parse(res))
+                //console.log(res)
+                //console.log(JSON.parse(res))
                 // Tranforms the top-level key of the response object from 'items' to 'results'
                 let hashmap  = JSON.parse(res)
                 let results = []
@@ -145,7 +145,7 @@ $(document).ready(function() {
                     results.push({id : hashmap[key].id, text: hashmap[key].name, disabled: false})
                 });
 
-                console.log(results);
+                //console.log(results);
                 return {
                     results: results
                 };
@@ -174,12 +174,12 @@ $(document).ready(function() {
 
     $( "#new-register" ).click(function( event ) {
         event.preventDefault();
-        console.log(instance.isValid());
-        console.log(instance);
-        console.log("At");
-        console.log(instanceAt.isValid());
-        console.log(instanceAt);
-        console.log($("#inputAddress").val());
+        //console.log(instance.isValid());
+        //console.log(instance);
+        //console.log("At");
+        //console.log(instanceAt.isValid());
+        //console.log(instanceAt);
+        //console.log($("#inputAddress").val());
 
         if(!instance.isValid()){
             $(instance.element).focus();
@@ -212,6 +212,54 @@ $(document).ready(function() {
         else if(!$("#inputEmail").parsley().isValid()){
             $("#inputEmail").focus();
             toastr.error('El email no es valido', 'Email')
+        }
+        else if(!$("#chk-open").prop('checked') && !$("#open-time").val()){
+            $("#open-time").focus();
+            toastr.error('Ingresar una hora', 'Hora de apertura')
+        }
+        else if(!$("#chk-open").prop('checked') && !$("#close-time").val()){
+            $("#close-time").focus();
+            toastr.error('Ingresar una hora', 'Hora de cierre')
+        }
+        /*else if($("#chk-open").prop('checked')){
+
+
+
+        } */else {
+
+            //console.log($("#chk-open").val());
+            //console.log($("#chk-open").prop('checked'));
+            //alert("todo es valido");
+            var data = {
+                nombrecomercial : $("#nombrecomercial").val(),
+                subcategorias : $("#subcategorias").val(),
+                ddpais : $("#ddpais").val(),
+                ddciudad : $("#ddciudad").val(),
+                dddistrito : $("#dddistrito").val(),
+                inputAddress : $("#inputAddress").val(),
+                inputPagweb : $("#inputPagweb").val(),
+                inputPhone : $("#inputPhone").val(),
+                inputEmail : $("#inputEmail").val(),
+                close_time : $("#close-time").val(),
+                open_time : $("#open-time").val(),
+                lat : $("#lat").val(),
+                lng : $("#lng").val(),
+                chk_open : $("#chk-open").prop('checked')
+            };
+            console.log(data);
+            axios.post('/ajax/newplace', data)
+                .then(function (response) {
+                    // handle success
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                })
+                .then(function () {
+                    // always executed
+                });
+
         }
         //data-parsley-trigger="change"
         //data-parsley-type-message="must be a valid email address"
@@ -253,7 +301,7 @@ $(document).ready(function() {
     }
 
     function report(state) {
-        console.log('Permission ' + state);
+        //console.log('Permission ' + state);
     }
 
     handlePermission();
@@ -312,8 +360,8 @@ $(document).ready(function() {
     }
 
     function setPosition(position) {
-        console.log("position");
-        console.log(position);
+        //console.log("position");
+        //console.log(position);
         if(map === undefined){
 
             var punto = {lat: position.coords.latitude, lng:  position.coords.longitude};
@@ -321,12 +369,17 @@ $(document).ready(function() {
                 zoom: 15,
                 center: punto
             });
+            console.log(punto)
         }
 
         map.setCenter(
             new google.maps.LatLng(
                 position.coords.latitude,
                 position.coords.longitude ) );
+        console.log(position.coords)
+        $("#latlng").val(position.coords.latitude+","+position.coords.longitude);
+        $("#lat").val(position.coords.latitude);
+        $("#lng").val(position.coords.longitude);
     }
 
 
