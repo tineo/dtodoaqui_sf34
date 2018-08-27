@@ -91,14 +91,19 @@ fos_user:
     user_class: AppBundle\Entity\User
     from_email:
         #address: "%mailer_user%"
-        address: "cesar@tineo.mobi"
+        address: "equipo@dtodoaqui.pw"
         #sender_name: "%mailer_user%"
-        sender_name: "cesar@tineo.mobi"
+        sender_name: "Equipo de Dtodoaqui"
     registration:
             form:
                 type: AppBundle\Form\RegistrationType
             confirmation:
                 enabled: true
+    resetting:
+            email:
+                from_email:
+                    address:        "equipo@dtodoaqui.pw"
+                    sender_name:    "Equipo de Dtodoaqui"
 
 hwi_oauth:
     #this is my custom user provider, created from FOSUBUserProvider - will manage the

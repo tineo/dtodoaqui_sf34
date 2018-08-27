@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Bussiness</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ bussiness.id }}</td>
+            </tr>
+            <tr>
+                <th>Id_distro</th>
+                <td>{{ bussiness.iddistro }}</td>
+            </tr>
+            <tr>
+                <th>Id_registar</th>
+                <td>{{ bussiness.idregistar }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ bussiness.name }}</td>
+            </tr>
+            <tr>
+                <th>Business_name</th>
+                <td>{{ bussiness.businessname }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ bussiness.image }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ bussiness.address }}</td>
+            </tr>
+            <tr>
+                <th>Latitude</th>
+                <td>{{ bussiness.latitude }}</td>
+            </tr>
+            <tr>
+                <th>Longitude</th>
+                <td>{{ bussiness.longitude }}</td>
+            </tr>
+            <tr>
+                <th>Zoom</th>
+                <td>{{ bussiness.zoom }}</td>
+            </tr>
+            <tr>
+                <th>Links</th>
+                <td>...</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_bussiness_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_bussiness_edit', { 'id': bussiness.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

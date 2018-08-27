@@ -54,7 +54,7 @@ class File
     /**
      * One File can have One Bussiness.
      * @ORM\OneToOne(targetEntity="Bussiness")
-     * @ORM\JoinColumn(name="idbussiness", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="idbussiness", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $bussiness;
 

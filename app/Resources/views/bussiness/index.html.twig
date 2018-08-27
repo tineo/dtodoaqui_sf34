@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Bussinesses list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Id_distro</th>
+                <th>Id_registar</th>
+                <th>Name</th>
+                <th>Business_name</th>
+                <th>Image</th>
+                <th>Address</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Zoom</th>
+                <th>Links</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bussiness in bussinesses %}
+            <tr>
+                <td><a href="{{ path('admin_bussiness_show', { 'id': bussiness.id }) }}">{{ bussiness.id }}</a></td>
+                <td>{{ bussiness.iddistro }}</td>
+                <td>{{ bussiness.idregistar }}</td>
+                <td>{{ bussiness.name }}</td>
+                <td>{{ bussiness.businessname }}</td>
+                <td>{{ bussiness.image }}</td>
+                <td>{{ bussiness.address }}</td>
+                <td>{{ bussiness.latitude }}</td>
+                <td>{{ bussiness.longitude }}</td>
+                <td>{{ bussiness.zoom }}</td>
+                <td>...</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_bussiness_show', { 'id': bussiness.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_bussiness_edit', { 'id': bussiness.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_bussiness_new') }}">Create a new bussiness</a>
+        </li>
+    </ul>
+{% endblock %}

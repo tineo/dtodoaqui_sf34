@@ -12,7 +12,7 @@
 
                 <div class="ui-box">
 
-                    <div id="welcome-panel">
+                    <div i¿Como registrarse?d="welcome-panel">
                         <div id="welcome-message">
                             <img src="{{ asset('img/logo.png') }}" alt="DtodoAqui" width="130px">
                             <p>Bienvenido, <br>Somos la red más grande de Latinoamérica que conecta personas con los negocios locales.</p>
@@ -86,12 +86,16 @@
                                placeholder="Contraseña"
                                class="form-control form-control-sm mt-1 mb-1"
                         />
-                        <input type="submit" class="login login-submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                        <input type="submit"
+                               class="login login-submit btn-sm btn-primary btn-block"
+                               id="_submit" name="_submit"
+                               value="{{ 'security.login.submit'|trans }}" />
 
 
 
                     </form>
-                    <a href="#">Olvide mi contraseña</a>
+                    <a href="{{ path('fos_user_resetting_request') }}">Olvide mi contraseña</a>
+
                 </div>
 
                 <div id="facebook-box" onclick="location.href='{{ "/login/facebook" }}';">
@@ -122,7 +126,9 @@
                     {{ form_errors(form.plainPassword.second) }}
 
 
-                    <input type="submit" value="{{ 'registration.submit'|trans }}" />
+                    <input
+                            class="btn-sm btn-primary btn-block"
+                            type="submit" value="{{ 'registration.submit'|trans }}" />
 
                     {{ form_rest(form) }}
 

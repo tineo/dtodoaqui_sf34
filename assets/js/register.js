@@ -251,6 +251,8 @@ $(document).ready(function() {
                 .then(function (response) {
                     // handle success
                     console.log(response);
+                    let ide = response.data;
+                    window.location.href = "/e/"+ide;
                 })
                 .catch(function (error) {
                     // handle error
