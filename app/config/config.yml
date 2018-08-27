@@ -7,8 +7,8 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: es
-    facebook_app_id: 794776284044888
-    facebook_app_secret: dd13d5f37fb06d7d176aff3828f46804
+    facebook_app_id: 1340587566008836
+    facebook_app_secret: 721b6d6e47b0f159ef2d75dd6c47f429
     google_app_id: 721b6d6e47b0f159ef2d75dd6c47f429
     google_app_secret: 721b6d6e47b0f159ef2d75dd6c47f429
     domain_auth: ''
